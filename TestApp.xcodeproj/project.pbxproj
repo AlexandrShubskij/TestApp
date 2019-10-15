@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F202DFFD2356466300249738 /* AddNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F202DFFC2356466300249738 /* AddNewViewController.swift */; };
 		F23E88642354AAC3003AE8CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23E88632354AAC3003AE8CF /* AppDelegate.swift */; };
 		F23E88662354AAC3003AE8CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23E88652354AAC3003AE8CF /* ViewController.swift */; };
 		F23E88692354AAC3003AE8CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F23E88672354AAC3003AE8CF /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F202DFFC2356466300249738 /* AddNewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewViewController.swift; sourceTree = "<group>"; };
 		F23E88602354AAC3003AE8CF /* TestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F23E88632354AAC3003AE8CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F23E88652354AAC3003AE8CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				F23E88632354AAC3003AE8CF /* AppDelegate.swift */,
 				F23E88652354AAC3003AE8CF /* ViewController.swift */,
 				F23E887C23561B88003AE8CF /* InfoViewController.swift */,
+				F202DFFC2356466300249738 /* AddNewViewController.swift */,
 				F23E88672354AAC3003AE8CF /* Main.storyboard */,
 				F23E886D2354AAC5003AE8CF /* Assets.xcassets */,
 				F23E887A2354C515003AE8CF /* AutosInfo.swift */,
@@ -149,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F23E88662354AAC3003AE8CF /* ViewController.swift in Sources */,
+				F202DFFD2356466300249738 /* AddNewViewController.swift in Sources */,
 				F23E886C2354AAC3003AE8CF /* TestApp.xcdatamodeld in Sources */,
 				F23E887B2354C515003AE8CF /* AutosInfo.swift in Sources */,
 				F23E88642354AAC3003AE8CF /* AppDelegate.swift in Sources */,

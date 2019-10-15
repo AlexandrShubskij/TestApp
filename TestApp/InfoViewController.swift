@@ -15,10 +15,15 @@ class InfoViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var colorTextField: UITextField!
     @IBOutlet weak var bodyTextField: UITextField!
     @IBOutlet weak var editInfoButton: UIBarButtonItem!
+
+    @IBOutlet weak var infoBottomConstraint: NSLayoutConstraint!
+    
     
     var autoName: String?
     
     override func viewDidLoad() {
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShows(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHides(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         super.viewDidLoad()
         editInfoButton.title = "Edit"
         infoViewNoEdit()
@@ -49,23 +54,38 @@ class InfoViewController: UIViewController, UITextFieldDelegate {
         } else {
             AutosInfo.autoInfo["\(autoName!)"]!["Manufacturer"] = manufacturerTextField.text
         }
-        guard yearTextField.text != nil else {
+        if yearTextField.text?.isEmpty == true {
             AutosInfo.autoInfo["\(autoName!)"]!["Year"] = "Не указано"
-            return
+        } else {
+            AutosInfo.autoInfo["\(autoName!)"]!["Year"] = yearTextField.text
         }
-        guard colorTextField.text != nil else {
+        if colorTextField.text?.isEmpty == true {
             AutosInfo.autoInfo["\(autoName!)"]!["Color"] = "Не указано"
-            return
+        } else {
+            AutosInfo.autoInfo["\(autoName!)"]!["Color"] = colorTextField.text
         }
-        guard bodyTextField.text != nil else {
+        if bodyTextField.text?.isEmpty == true {
             AutosInfo.autoInfo["\(autoName!)"]!["Body"] = "Не указано"
-            return
+        } else {
+            AutosInfo.autoInfo["\(autoName!)"]!["Body"] = bodyTextField.text
         }
-        
-        AutosInfo.autoInfo["\(autoName!)"]!["Year"] = yearTextField.text
-        AutosInfo.autoInfo["\(autoName!)"]!["Color"] = colorTextField.text
-        AutosInfo.autoInfo["\(autoName!)"]!["Body"] = bodyTextField.text
     }
+    
+//    @objc func keyboardWillShows(notification: Notification) {
+//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+//            if self.view.frame.origin.y == 0 {
+//                if  infoBottomConstraint.constant < keyboardSize.height {
+//                    self.view.frame.origin.y += (infoBottomConstraint.constant - keyboardSize.height)
+//                }
+//            }
+//        }
+//    }
+//
+//    @objc func keyboardWillHides(notification: Notification) {
+//        if self.view.frame.origin.y != 0 {
+//            self.view.frame.origin.y = 0
+//        }
+//    }
     
     
     @IBAction func editInfoButtonAction(_ sender: Any) {
@@ -74,7 +94,7 @@ class InfoViewController: UIViewController, UITextFieldDelegate {
         colorTextField.isEnabled = !colorTextField.isEnabled
         bodyTextField.isEnabled = !bodyTextField.isEnabled
         if manufacturerTextField.isEnabled == true {
-            editInfoButton.title = "Done"
+            editInfoButton.title = "Save"
             manufacturerTextField.borderStyle = .roundedRect
             yearTextField.borderStyle = .roundedRect
             colorTextField.borderStyle = .roundedRect

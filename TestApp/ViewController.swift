@@ -9,30 +9,41 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var autoTableView: UITableView!
     
     @IBOutlet weak var editButton: UIBarButtonItem!
     
     
     
+    var autosNames = [String]()
     var autoNames = [String]()
     let identifire = "autoNamesCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         editButton.title = "Edit"
-        for autos in AutosInfo.autoInfo.keys {
-            autoNames.append(autos)
-        }
-        autoNames.sort()
-//        print(AutosInfo.autoInfo["BMW X6"]!["Body"] as Any)
+        makeArray()
+        self.title = "Автомобили"
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        makeArray()
+        self.autoTableView.reloadData()
+    }
+    
+    func  makeArray() {
+        for autos in AutosInfo.autoInfo.keys {
+            autosNames.append(autos)
+        }
+        autoNames = Array(Set(autosNames))
+        autoNames.sort()
+    }
+    
     //MARK: edit button action
     @IBAction func editButtonAction(_ sender: Any) {
         if autoTableView.isEditing == false {
-            editButton.title = "Done"
+            editButton.title = "Save"
         } else {
             editButton.title = "Edit"
         }
@@ -42,7 +53,6 @@ class ViewController: UIViewController {
     //MARK: add button action
     @IBAction func addButtonAction(_ sender: Any) {
     }
-    
     
     
 }
@@ -62,11 +72,12 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    
+    //MARK: prepare fo segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let dvc = segue.destination as? InfoViewController else {return}
         if let indexPath = autoTableView.indexPathForSelectedRow {
-            let dvc = segue.destination as! InfoViewController
-            dvc.autoName = self.autoNames[indexPath.row]
+                dvc.autoName = self.autoNames[indexPath.row]
+
         }
     }
     
@@ -91,7 +102,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         autoNames.insert(item, at: destinationIndexPath.row)
     }
     
-    //MARK: copy cells info
+    //MARK: copy auto name in cells
     func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
         return true
     }

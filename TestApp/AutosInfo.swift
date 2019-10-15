@@ -12,12 +12,12 @@ class AutosInfo: NSObject {
                                                                        "Year": "2010",
                                                                        "Color": "Красный",
                                                                        "Body": "Седан"],
-                                                    "BMW X6": ["Manufacturer": "BMW",
-                                                               "Year": "2014",
-                                                               "Color": "Белый",
-                                                               "Body": "Кроссовер"],
-                                                    "Audi A8": ["Manufacturer": "Audi",
-                                                                "Year": "2019",
-                                                                "Color": "Серый",
-                                                                "Body": "Седан"]]
+                                                       "BMW X6": ["Manufacturer": "BMW",
+                                                                  "Year": "2014",
+                                                                  "Color": "Белый",
+                                                                  "Body": "Кроссовер"],
+                                                       "Audi A8": ["Manufacturer": "Audi",
+                                                                   "Year": "2019",
+                                                                   "Color": "Серый",
+                                                                   "Body": "Седан"]]
 }
