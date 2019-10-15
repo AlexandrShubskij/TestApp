@@ -14,6 +14,8 @@
 		F23E886E2354AAC5003AE8CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F23E886D2354AAC5003AE8CF /* Assets.xcassets */; };
 		F23E88712354AAC5003AE8CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F23E886F2354AAC5003AE8CF /* LaunchScreen.storyboard */; };
 		F23E88792354B694003AE8CF /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F23E88782354B694003AE8CF /* .gitignore */; };
+		F23E887B2354C515003AE8CF /* AutosInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23E887A2354C515003AE8CF /* AutosInfo.swift */; };
+		F23E887D23561B88003AE8CF /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23E887C23561B88003AE8CF /* InfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		F23E88702354AAC5003AE8CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F23E88722354AAC5003AE8CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F23E88782354B694003AE8CF /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		F23E887A2354C515003AE8CF /* AutosInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutosInfo.swift; sourceTree = "<group>"; };
+		F23E887C23561B88003AE8CF /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,11 +65,13 @@
 			children = (
 				F23E88632354AAC3003AE8CF /* AppDelegate.swift */,
 				F23E88652354AAC3003AE8CF /* ViewController.swift */,
+				F23E887C23561B88003AE8CF /* InfoViewController.swift */,
 				F23E88672354AAC3003AE8CF /* Main.storyboard */,
 				F23E886D2354AAC5003AE8CF /* Assets.xcassets */,
-				F23E886F2354AAC5003AE8CF /* LaunchScreen.storyboard */,
+				F23E887A2354C515003AE8CF /* AutosInfo.swift */,
 				F23E88722354AAC5003AE8CF /* Info.plist */,
 				F23E886A2354AAC3003AE8CF /* TestApp.xcdatamodeld */,
+				F23E886F2354AAC5003AE8CF /* LaunchScreen.storyboard */,
 			);
 			path = TestApp;
 			sourceTree = "<group>";
@@ -144,7 +150,9 @@
 			files = (
 				F23E88662354AAC3003AE8CF /* ViewController.swift in Sources */,
 				F23E886C2354AAC3003AE8CF /* TestApp.xcdatamodeld in Sources */,
+				F23E887B2354C515003AE8CF /* AutosInfo.swift in Sources */,
 				F23E88642354AAC3003AE8CF /* AppDelegate.swift in Sources */,
+				F23E887D23561B88003AE8CF /* InfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

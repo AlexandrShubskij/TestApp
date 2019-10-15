@@ -14,15 +14,22 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var editButton: UIBarButtonItem!
     
-    var autoNames = ["Lada Kalina", "BMW X6", "Audi A8"]
+    
+    
+    var autoNames = [String]()
     let identifire = "autoNamesCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         editButton.title = "Edit"
+        for autos in AutosInfo.autoInfo.keys {
+            autoNames.append(autos)
+        }
+        autoNames.sort()
+//        print(AutosInfo.autoInfo["BMW X6"]!["Body"] as Any)
     }
 
-    
+    //MARK: edit button action
     @IBAction func editButtonAction(_ sender: Any) {
         if autoTableView.isEditing == false {
             editButton.title = "Done"
@@ -32,10 +39,15 @@ class ViewController: UIViewController {
         autoTableView.isEditing = !autoTableView.isEditing
     }
     
+    //MARK: add button action
     @IBAction func addButtonAction(_ sender: Any) {
     }
     
+    
+    
 }
+
+
 
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
@@ -50,6 +62,13 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let indexPath = autoTableView.indexPathForSelectedRow {
+            let dvc = segue.destination as! InfoViewController
+            dvc.autoName = self.autoNames[indexPath.row]
+        }
+    }
     
     //MARK: delete cells
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
@@ -70,6 +89,24 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         let item = autoNames[sourceIndexPath.row]
         autoNames.remove(at: sourceIndexPath.row)
         autoNames.insert(item, at: destinationIndexPath.row)
+    }
+    
+    //MARK: copy cells info
+    func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+        if action == #selector(copy(_:)) {
+            return true
+        }
+        return false
+    }
+    func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
+        if action == #selector(copy(_:)) {
+            let cell = tableView.cellForRow(at: indexPath)
+            let pasteBoard = UIPasteboard.general
+            pasteBoard.string = cell?.textLabel?.text
+        }
     }
     
 }
