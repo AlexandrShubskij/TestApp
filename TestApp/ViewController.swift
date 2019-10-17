@@ -33,6 +33,7 @@ class ViewController: UIViewController {
     }
     
     func  makeArray() {
+        autosNames.removeAll()
         for autos in AutosInfo.autoInfo.keys {
             autosNames.append(autos)
         }
@@ -51,8 +52,6 @@ class ViewController: UIViewController {
     }
     
     //MARK: add button action
-    @IBAction func addButtonAction(_ sender: Any) {
-    }
     
     
 }
@@ -68,7 +67,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: identifire, for: indexPath)
         cell.textLabel?.text = autoNames[indexPath.row ]
-        
         return cell
     }
     
@@ -87,9 +85,33 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            autoNames.remove(at: indexPath.row)
-            autoTableView.deleteRows(at: [indexPath], with: .left)
+            showDeleteWarning(for: indexPath)
+            
+            
+            
+            
+            
         }
+    }
+    func showDeleteWarning(for indexPath: IndexPath) {
+        let alert = UIAlertController(title: "Предупреждение!", message: "Вы действительно хотите удалить автомобиль?", preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Нет", style: .cancel, handler: nil)
+        
+        let deleteAction = UIAlertAction(title: "Да", style: .destructive) { _ in
+            DispatchQueue.main.async {
+                AutosInfo.autoInfo[self.autoNames[indexPath.row]] = nil
+                self.autoNames.remove(at: indexPath.row)
+                self.autoTableView.deleteRows(at: [indexPath], with: .left)
+            }
+        }
+        
+        //Add the actions to the alert controller
+        alert.addAction(cancelAction)
+        alert.addAction(deleteAction)
+        
+        //Present the alert controller
+        present(alert, animated: true, completion: nil)
     }
     
     //MARK: move cells

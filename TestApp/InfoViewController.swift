@@ -16,14 +16,23 @@ class InfoViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var bodyTextField: UITextField!
     @IBOutlet weak var editInfoButton: UIBarButtonItem!
 
-    @IBOutlet weak var infoBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var manufacturerTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var yearTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var colorTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bodyTopConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var manufacturerStackViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var yearStackViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var colorStackViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var bodyStackViewHeight: NSLayoutConstraint!
+    
     
     
     var autoName: String?
     
     override func viewDidLoad() {
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShows(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHides(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShows(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHides(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         super.viewDidLoad()
         editInfoButton.title = "Edit"
         infoViewNoEdit()
@@ -71,21 +80,46 @@ class InfoViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-//    @objc func keyboardWillShows(notification: Notification) {
-//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-//            if self.view.frame.origin.y == 0 {
-//                if  infoBottomConstraint.constant < keyboardSize.height {
-//                    self.view.frame.origin.y += (infoBottomConstraint.constant - keyboardSize.height)
-//                }
-//            }
-//        }
-//    }
-//
-//    @objc func keyboardWillHides(notification: Notification) {
-//        if self.view.frame.origin.y != 0 {
-//            self.view.frame.origin.y = 0
-//        }
-//    }
+    //MARK: up content above keyboard
+    @objc func keyboardWillShows(notification: Notification) {
+        let viewWithoutStatusBarAndNavigationBar = self.view.frame.size.height - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.size.height
+        let manufacturerBottomConstraint  = viewWithoutStatusBarAndNavigationBar - manufacturerTopConstraint.constant - manufacturerStackViewHeight.constant
+        let yearBottomConstraint = viewWithoutStatusBarAndNavigationBar - yearTopConstraint.constant - yearStackViewHeight.constant
+        let colorBottomConstrain = viewWithoutStatusBarAndNavigationBar - colorTopConstraint.constant - colorStackViewHeight.constant
+        let bodyBottomConstraint = viewWithoutStatusBarAndNavigationBar - bodyTopConstraint.constant - bodyStackViewHeight.constant
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            print(bodyBottomConstraint)
+            print(keyboardSize.height)
+            if self.view.frame.origin.y == 0 {
+                if manufacturerTextField.isEditing ==  true {
+                    if manufacturerBottomConstraint < keyboardSize.height {
+                        self.view.frame.origin.y -= (keyboardSize.height - manufacturerBottomConstraint)
+                    }
+                }
+                if yearTextField.isEditing == true {
+                    if yearBottomConstraint < keyboardSize.height {
+                        self.view.frame.origin.y -= (keyboardSize.height - yearBottomConstraint)
+                    }
+                }
+                if colorTextField.isEditing == true {
+                    if  colorBottomConstrain < keyboardSize.height {
+                        self.view.frame.origin.y -= (keyboardSize.height - colorBottomConstrain)
+                    }
+                }
+                if bodyTextField.isEditing ==  true {
+                    if  bodyBottomConstraint < keyboardSize.height {
+                        self.view.frame.origin.y -= (keyboardSize.height - bodyBottomConstraint)
+                    }
+                }
+            }
+        }
+    }
+
+    @objc func keyboardWillHides(notification: Notification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
     
     
     @IBAction func editInfoButtonAction(_ sender: Any) {
