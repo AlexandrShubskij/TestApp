@@ -22,15 +22,25 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         editButton.title = "Edit"
         makeArray()
         self.title = "Автомобили"
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        guard UserDefaults.standard.dictionary(forKey: "Autos") != nil else {
+            UserDefaults.standard.setValue(AutosInfo.autoInfo, forKey: "Autos")
+            return
+        }
+        guard let loadData = UserDefaults.standard.dictionary(forKey: "Autos") as? [String : [String : String]] else { return }
+        AutosInfo.autoInfo = loadData
         makeArray()
         self.autoTableView.reloadData()
     }
+    
     
     func  makeArray() {
         autosNames.removeAll()
@@ -50,8 +60,6 @@ class ViewController: UIViewController {
         }
         autoTableView.isEditing = !autoTableView.isEditing
     }
-    
-    //MARK: add button action
     
     
 }
@@ -103,6 +111,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                 AutosInfo.autoInfo[self.autoNames[indexPath.row]] = nil
                 self.autoNames.remove(at: indexPath.row)
                 self.autoTableView.deleteRows(at: [indexPath], with: .left)
+                UserDefaults.standard.removeObject(forKey: "Autos")
+                UserDefaults.standard.setValue(AutosInfo.autoInfo, forKey: "Autos")
             }
         }
         
@@ -112,16 +122,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
         //Present the alert controller
         present(alert, animated: true, completion: nil)
-    }
-    
-    //MARK: move cells
-    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let item = autoNames[sourceIndexPath.row]
-        autoNames.remove(at: sourceIndexPath.row)
-        autoNames.insert(item, at: destinationIndexPath.row)
     }
     
     //MARK: copy auto name in cells
@@ -143,4 +143,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
 }
+
+
 

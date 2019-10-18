@@ -82,6 +82,8 @@ class AddNewViewController: UIViewController, UITextFieldDelegate {
     @IBAction func saveButtonAction(_ sender: Any) {
         check()
         endWriting()
+        UserDefaults.standard.removeObject(forKey: "Autos")
+        UserDefaults.standard.setValue(AutosInfo.autoInfo, forKey: "Autos")
     }
     
     func endWriting() {

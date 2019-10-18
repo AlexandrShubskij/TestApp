@@ -88,8 +88,6 @@ class InfoViewController: UIViewController, UITextFieldDelegate {
         let colorBottomConstrain = viewWithoutStatusBarAndNavigationBar - colorTopConstraint.constant - colorStackViewHeight.constant
         let bodyBottomConstraint = viewWithoutStatusBarAndNavigationBar - bodyTopConstraint.constant - bodyStackViewHeight.constant
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            print(bodyBottomConstraint)
-            print(keyboardSize.height)
             if self.view.frame.origin.y == 0 {
                 if manufacturerTextField.isEditing ==  true {
                     if manufacturerBottomConstraint < keyboardSize.height {
@@ -139,6 +137,8 @@ class InfoViewController: UIViewController, UITextFieldDelegate {
             editInfoButton.title = "Edit"
             saveChanges()
             infoViewNoEdit()
+            UserDefaults.standard.removeObject(forKey: "Autos")
+            UserDefaults.standard.setValue(AutosInfo.autoInfo, forKey: "Autos")
         }
         
     }
