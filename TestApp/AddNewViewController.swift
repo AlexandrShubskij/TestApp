@@ -39,6 +39,7 @@ class AddNewViewController: UIViewController, UITextFieldDelegate {
     var color: String?
     var body: String?
     
+    //MARK: Check and save new data in dictionary
     func check() {
         if (modelTextField.text?.isEmpty == true) || (modelTextField.text == nil) {
             model = "Неизвестно"
@@ -78,7 +79,7 @@ class AddNewViewController: UIViewController, UITextFieldDelegate {
     
         
     
-    
+    //MARK: Save button action
     @IBAction func saveButtonAction(_ sender: Any) {
         check()
         endWriting()
@@ -86,6 +87,7 @@ class AddNewViewController: UIViewController, UITextFieldDelegate {
         UserDefaults.standard.setValue(AutosInfo.autoInfo, forKey: "Autos")
     }
     
+    //MARK: Edit/no edit interface
     func endWriting() {
         modelTextField.isEnabled = !modelTextField.isEnabled
         manufacturerTextField.isEnabled = !manufacturerTextField.isEnabled
@@ -109,6 +111,7 @@ class AddNewViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    //MARK: Up content above keyboard
     @objc func keyboardWillShows(notification: Notification) {
         let viewWithoutStatusBarAndNavigationBar = self.view.frame.size.height - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.size.height
         let modelBottomConstraint  = viewWithoutStatusBarAndNavigationBar - modelTopConstraint.constant - modelStackViewHeight.constant
@@ -153,6 +156,9 @@ class AddNewViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    
+    
+    // Up/down keyboard with touch inside the keyboard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false

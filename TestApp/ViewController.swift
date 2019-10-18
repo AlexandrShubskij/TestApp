@@ -31,17 +31,17 @@ class ViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        guard UserDefaults.standard.dictionary(forKey: "Autos") != nil else {
+        guard UserDefaults.standard.dictionary(forKey: "Autos") != nil else {           //Проверка на наличие содержимого в UserDefaults
             UserDefaults.standard.setValue(AutosInfo.autoInfo, forKey: "Autos")
             return
         }
-        guard let loadData = UserDefaults.standard.dictionary(forKey: "Autos") as? [String : [String : String]] else { return }
+        guard let loadData = UserDefaults.standard.dictionary(forKey: "Autos") as? [String : [String : String]] else { return }     // Проверка на тип получаемого из UserDefaults значения
         AutosInfo.autoInfo = loadData
         makeArray()
         self.autoTableView.reloadData()
     }
     
-    
+    //MARK: Create array with cell names
     func  makeArray() {
         autosNames.removeAll()
         for autos in AutosInfo.autoInfo.keys {
@@ -51,7 +51,7 @@ class ViewController: UIViewController {
         autoNames.sort()
     }
     
-    //MARK: edit button action
+    //MARK: Edit button action
     @IBAction func editButtonAction(_ sender: Any) {
         if autoTableView.isEditing == false {
             editButton.title = "Save"
@@ -87,7 +87,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    //MARK: delete cells
+    //MARK: Delete  cells
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
     }
@@ -101,6 +101,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             
         }
     }
+    
+    //MARK: Warning message
     func showDeleteWarning(for indexPath: IndexPath) {
         let alert = UIAlertController(title: "Предупреждение!", message: "Вы действительно хотите удалить автомобиль?", preferredStyle: .alert)
         
@@ -115,16 +117,12 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                 UserDefaults.standard.setValue(AutosInfo.autoInfo, forKey: "Autos")
             }
         }
-        
-        //Add the actions to the alert controller
         alert.addAction(cancelAction)
         alert.addAction(deleteAction)
-        
-        //Present the alert controller
         present(alert, animated: true, completion: nil)
     }
     
-    //MARK: copy auto name in cells
+    //MARK: Copy auto name in cells
     func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
         return true
     }

@@ -40,7 +40,7 @@ class InfoViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    
+    //MARK: Edit/no edit interface
     func infoViewNoEdit() {
         manufacturerTextField.text = (AutosInfo.autoInfo["\(autoName!)"]!["Manufacturer"] as Any as! String)
         yearTextField.text = (AutosInfo.autoInfo["\(autoName!)"]!["Year"] as Any as! String)
@@ -56,7 +56,7 @@ class InfoViewController: UIViewController, UITextFieldDelegate {
         bodyTextField.borderStyle = .none
     }
     
-    
+    //MARK: Check and save changes in dictionary
     func saveChanges() {
         if manufacturerTextField.text?.isEmpty == true {
             AutosInfo.autoInfo["\(autoName!)"]!["Manufacturer"] = "Не указано"
@@ -80,7 +80,7 @@ class InfoViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    //MARK: up content above keyboard
+    //MARK: Up content above keyboard
     @objc func keyboardWillShows(notification: Notification) {
         let viewWithoutStatusBarAndNavigationBar = self.view.frame.size.height - (self.navigationController?.navigationBar.frame.size.height)! - UIApplication.shared.statusBarFrame.size.height
         let manufacturerBottomConstraint  = viewWithoutStatusBarAndNavigationBar - manufacturerTopConstraint.constant - manufacturerStackViewHeight.constant
@@ -119,7 +119,7 @@ class InfoViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    
+    //MARK: Edit button action
     @IBAction func editInfoButtonAction(_ sender: Any) {
         manufacturerTextField.isEnabled = !manufacturerTextField.isEnabled
         yearTextField.isEnabled = !yearTextField.isEnabled
@@ -143,7 +143,7 @@ class InfoViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    
+    // Up/down keyboard with touch inside the keyboard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
