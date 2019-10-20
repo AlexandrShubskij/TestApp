@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -275,7 +276,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" smartDashesType="no"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" smartDashesType="no"/>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -321,7 +322,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" smartDashesType="no"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" smartDashesType="no"/>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -344,7 +345,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="yes" smartDashesType="no" smartInsertDeleteType="yes" smartQuotesType="yes"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="yes" smartDashesType="no" smartInsertDeleteType="yes" smartQuotesType="yes"/>
                                     </textField>
                                 </subviews>
                                 <constraints>
